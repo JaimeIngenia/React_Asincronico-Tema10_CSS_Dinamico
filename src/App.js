@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Cards from "./components/Cards/Cards";
+import { imagesGallery } from "./statics/data";
+import styles from "./App.module.css"
+import { useState } from "react";
+
+
 
 function App() {
+  //Estados 
+  const[isDarkMode,setIsDarkMode]=useState(false)
+  //Eventos
+  const manejoCambioTema=()=>{
+    setIsDarkMode(!isDarkMode);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className={`${isDarkMode ? styles.AppDark :styles.AppLight} `}> 
+      <header className={styles.header}>
+        <h1>Galería de imágenes</h1>
+        <button
+          className={`${isDarkMode ? styles.btnThemeDark : styles.btnTheme}`}         
+          onClick={manejoCambioTema}
         >
-          Learn React
-        </a>
+          {isDarkMode? "MODO LIGTH":"MODO DARK"}
+        </button>
       </header>
+      <Cards images={imagesGallery}/>
     </div>
   );
 }
